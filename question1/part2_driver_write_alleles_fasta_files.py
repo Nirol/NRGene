@@ -1,4 +1,3 @@
-# Import pandas
 import pandas as pd
 import read_write
 

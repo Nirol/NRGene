@@ -3,8 +3,8 @@ def create_plot_hist_no_fixed_bins(data_series, plot_title, plot_x_title,
     ax = data_series.plot.hist(rot=0, color='mediumvioletred',
                                alpha=0.8,
                                title=plot_title, bins=num_bins,
-                               figsize=(12, 6), logy=True)
-    x_multiplier = 1.01
+                               figsize=(8, 4), logy=True)
+    x_multiplier = 1.05
     for p in ax.patches:
         ax.annotate(str(int(p.get_height())),
                     (p.get_x() * x_multiplier, p.get_height() * 1.005))

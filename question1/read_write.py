@@ -3,9 +3,9 @@ import pandas as pd
 
 def _write_output_csv_file(output_towrite):
     df = pd.DataFrame(data=output_towrite)
-    df.to_csv("output/part1/markers_data.csv", sep=',', header=False,
+    df.to_csv("output/part1/sim_matrix.csv", sep=',', header=False,
               index=False)
-    df.to_csv("output/part2/markers_data.csv", sep=',', header=False,
+    df.to_csv("output/part2/sim_matrix.csv", sep=',', header=False,
               index=False)
 
 

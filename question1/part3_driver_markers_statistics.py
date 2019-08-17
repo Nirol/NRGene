@@ -117,12 +117,12 @@ def analyze_marker_snp_freq(marker_df):
     fraction_alleles = marker_df.groupby(['allele_1', 'allele_2']).size()
     percent_allels = fraction_alleles.round(2)
 
-    ax = fraction_alleles.plot.bar(logy=True, figsize=(15, 7), rot=0,
+    ax = fraction_alleles.plot.bar(logy=True, figsize=(12, 6), rot=0,
                                    title="SNPs Alleles Frequencies")
 
     ax.set_ylabel("Freq", labelpad=20, weight='bold', size=10,
                   rotation=0)
-    ax.set_xlabel("SNP Alleles", labelpad=20, weight='bold', size=10,
+    ax.set_xlabel("SNP Types", labelpad=20, weight='bold', size=10,
                   rotation=0)
     for p in ax.patches:
         ax.annotate(str(p.get_height()),
@@ -131,14 +131,43 @@ def analyze_marker_snp_freq(marker_df):
     plt.show()
 
 
+def analyze_marker_snp_idx_marker_length_connection(df):
+    df_marker_length_101 = df.loc[df["marker_length"] == 101]
+    analyze_marker_snp_idx(df_marker_length_101)
+
+    df_marker_length_101 = df.loc[df["marker_length"] == 201]
+    analyze_marker_snp_idx(df_marker_length_101)
+
+
+def analyze_marker_length_allele_freq(marker_df):
+    marker_snp_idx_df = marker_df[["marker_name", "snp_idx"]]
+    single_var_stats(marker_snp_idx_df, "snp_idx")
+    marker_snp_idx_series = marker_df["snp_idx"]
+    plot_snp_idx_bar_graph(marker_snp_idx_series)
+
+
+def find_top_2_value_count_marker_length_for_alleles(df, char_1, char_2):
+    df_cut = df.loc[(df["allele_1"] == char_1) & (df["allele_2"] == char_2)]
+    print(df_cut["marker_length"].value_counts().head(2))
+
+
+def analyze_allele_freq_marker_length(df):
+    fraction_alleles = df.groupby(['allele_1', 'allele_2']).size()
+    print (fraction_alleles)
+    char_1_list = ['A', 'C', 'G']
+    char_2_list = ['C', 'G', 'T']
+    for char_1 in char_1_list:
+        for char_2 in char_2_list:
+            find_top_2_value_count_marker_length_for_alleles(df, char_1, char_2)
+
+
 if __name__ == '__main__':
     marker_data_df = pd.read_csv("output/part1/marker_data.csv",
                                  names=HEADLINE_COL_NAMES)
     analyze_marker_length(marker_data_df)
     analyze_marker_snp_idx(marker_data_df)
     analyze_marker_snp_freq(marker_data_df)
+    #Other statistics:
+    analyze_marker_snp_idx_marker_length_connection(marker_data_df)
+    analyze_allele_freq_marker_length(marker_data_df)
 
-    # more ides:
-    # cov between length and snp index
-    # snp index of most common lenth and the the opposite
-    # connection between allel and legnth
