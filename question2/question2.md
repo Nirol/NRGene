@@ -146,21 +146,26 @@ Heterozygous fraction bin | Markers Count
 
 # Part 3
 
-As of now part 3 implantation is working only on small samples csv input  
-due to memory problem caused by either my machine limitations or the code  
-efficiency. The implementation can be found at question2/part3/sim_matrix.py  
+  
+***Please Note: part 3 does not have its own driver file, it can be run from
+part2 driver last comment out lines.***
+
+My implantation of the similarity matrix is working only on a smaller dataset  
+of genotypes data due to memory problems caused by either my machine  
+limitations or code efficiency. The implementation can be found  
+at question2/part3/sim_matrix.py  
  
- 
+Example output on a smaller dataset can be found [here](question2/output/part3/sim_matrix.csv)
  
 My idea was to create a new dataframe with the combination of every 2 samples  
-as a columns, Each row represent one marker as in the original csv input  
+as a column, and Each row represent one marker as in the original csv input  
 data file.
  
 Each cell in the new dataframe will be filled with 1 if both of the samples  
 represented by the column have a valid nucleotide read on the marker  
- represented by the row.
+represented by the row.
+
+Lastly, the result similarity matrix is created after summing up the  
+occurrences of 1's in each column - that's the number of shared markers  
+between the two samples represented by the column.
  
- Example output on smaller dataset can be found in question2/output/part3/ma
-  
-Please Note: part 3 does not have its own driver file, it can be run from
-part2 driver last comment out lines.
